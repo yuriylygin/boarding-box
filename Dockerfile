@@ -1,10 +1,4 @@
-FROM  rackspacedot/python37:latest
-
-RUN python -m pip install -U pip
-
-RUN pip install cmake
-
-RUN pip install dlib --verbose
+FROM  yuriylygin/dlib-python:latest
 
 COPY requirements.txt /src/requirements.txt
 
