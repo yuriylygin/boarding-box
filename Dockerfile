@@ -1,13 +1,17 @@
-FROM  yuriylygin/dlib-python:latest
+FROM  yuriylygin/dlib-python:dlib19.21.0-py3.7
 
-COPY requirements.txt /src/requirements.txt
+RUN pip install pipenv
 
-RUN pip install -r /src/requirements.txt
+WORKDIR /src/
 
-COPY app /src/app
+COPY app app
 
-COPY model /src/model
+COPY model model
 
-WORKDIR /src/workspace
+COPY Pipfile Pipfile
 
-CMD [ "python", "/src/app/boarding_box.py" ]
+COPY Pipfile.lock Pipfile.lock
+
+RUN pipenv install --site-packages
+
+CMD ["pipenv", "run", "python", "app/boarding_box.py" ]
