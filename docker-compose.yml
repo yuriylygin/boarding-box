@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  flask:
+    build:
+      context: .
+    image: yuriylygin/boarding-box:latest
+    ports:
+        - 80:80
+    volumes:
+        - ./:/src
