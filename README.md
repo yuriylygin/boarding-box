@@ -6,17 +6,29 @@ docker container run -it --rm --name boarding-box -p 80:80  yuriylygin/boarding-
 
 docker container run -it --rm --name boarding-box -p 80:80 -v ${pwd}:/src yuriylygin/boarding-box bash
 
-OR use docker-compose
+# Development run under docker-compose and testing
+
+1) Firstly run docker-compose:
+docker-compose
+
+2) Next you should run bash inside the running 'flask' container:
+docker container exec -it flask bash
+
+3) Before running pytests you have to install packages that are used for development process only:
+pipenv install --dev --skip-lock
+
+4) Now run tests in the created environment:
+pipenv run pytest -v
 
 # Description
 
-Flask wep application 'boarding_box.py' process POST requests with 'file' field which should contain JPEG image.
+Flask wep application 'boarding_box' process POST requests with 'file' field which should contain JPEG image.
 
 Response is an array of face locations and five face points for each face.
 
 # Example
 
-curl -F "file=@/mnt/d/py-projects/boarding-box/tests/files/two-persons-3034796.jpg" http://127.0.0.1:80/
+curl -F "file=@path/to/a/file.jpg" http://127.0.0.1:80/
 
 Response:
 
@@ -32,7 +44,7 @@ Response:
 ]
 
 
-# Failed requests
+# Requests to fail
 
 curl -F "file=" http://127.0.0.1:80/
 

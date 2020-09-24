@@ -1,17 +1,15 @@
 FROM  yuriylygin/dlib-python:dlib19.21.0-py3.7
 
-RUN pip install pipenv
+RUN pip install pipenv setuptools wheel
 
 WORKDIR /src/
 
-COPY app app
+COPY boarding_box boarding_box
 
 COPY model model
 
 COPY Pipfile Pipfile
 
-COPY Pipfile.lock Pipfile.lock
+RUN pipenv install --site-packages --skip-lock --clear
 
-RUN pipenv install --site-packages
-
-CMD ["pipenv", "run", "python", "app/boarding_box.py" ]
+CMD ["pipenv", "run", "python", "boarding_box/app.py" ]
