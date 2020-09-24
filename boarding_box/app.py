@@ -14,6 +14,7 @@ class BoardingBox(Resource):
 
     def post(self):
         args = self.parser.parse_args()
+        # print(args, flush=True)
 
         if args.file.mimetype in ['image/jpeg']:
 
@@ -47,4 +48,4 @@ class BoardingBox(Resource):
 api.add_resource(BoardingBox, '/')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="80", debug=False)
+    app.run(host="0.0.0.0", port="80", debug=True)

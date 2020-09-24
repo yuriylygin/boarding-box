@@ -5,7 +5,9 @@ services:
     build:
       context: .
     image: yuriylygin/boarding-box:latest
+    container_name: flask
     ports:
-        - 80:80
+      - 80:80
     volumes:
-        - ./:/src
+      - ./:/src
+
